@@ -1,0 +1,108 @@
+WEBVTT
+
+NOTE Text follows the V006 documented narration and dialogue windows. Some on-site speech outside documented windows is not transcribed.
+
+1
+00:00:00.300 --> 00:00:09.600
+InstAgent is an agent operating system for heterogeneous multi-robot collaboration. It organizes different robot capabilities into executable collaboration programs.
+
+2
+00:00:10.200 --> 00:00:15.700
+Our contributions span a physical agent OS, collaborative self-improvement, and real-robot evaluation.
+
+3
+00:00:16.300 --> 00:00:21.700
+Collab-RSI improves collaboration programs through execution feedback and retains verified revisions.
+
+4
+00:00:22.100 --> 00:00:31.600
+Guidance, navigation, and loading are organized as behavior trees with defined steps and dependencies. Programs and their usage conditions form reusable experience.
+
+5
+00:00:32.300 --> 00:00:36.700
+A guidance program specifies its destination input and the conditions for use.
+
+6
+00:00:37.200 --> 00:00:41.100
+For a new guidance and delivery task,
+
+7
+00:00:41.700 --> 00:00:43.600
+the system composes existing experience.
+
+8
+00:00:44.720 --> 00:00:45.650
+Hello.
+
+9
+00:00:46.383 --> 00:00:49.383
+What can I do for you?
+
+10
+00:00:49.733 --> 00:00:51.683
+Find a seat for me with G1.
+
+11
+00:00:52.533 --> 00:00:54.783
+Please follow me.
+
+12
+00:00:59.267 --> 00:01:03.567
+Here is your seat. Please have a seat.
+
+13
+00:01:04.467 --> 00:01:06.749
+Bring me some Coke and chips.
+
+14
+00:01:07.367 --> 00:01:13.517
+Sure. I'll arrange for Coke and chips to be delivered to your destination.
+
+15
+00:01:14.100 --> 00:01:16.700
+Go2 heads to the shelf.
+
+16
+00:01:17.750 --> 00:01:25.850
+The bimanual robot, Split ALOHA, handles loading, placing chips into the basket carried by Go2.
+
+17
+00:01:27.833 --> 00:01:33.833
+It then adds a Coke, completing the load for Go2 to transport.
+
+18
+00:01:38.933 --> 00:01:43.933
+Go2 carries both items back to the seating area.
+
+19
+00:01:48.033 --> 00:01:52.333
+The user receives both items, completing the task.
+
+20
+00:01:53.000 --> 00:02:01.700
+Shared Memory gives collaboration a common view of the environment. An exploration request brings observations from different robots together.
+
+21
+00:02:02.100 --> 00:02:13.700
+The map marks robot locations and their spatial relationships. Shared Memory organizes spatial information into a common environmental context that supports collaboration.
+
+22
+00:02:17.000 --> 00:02:21.600
+Users can speak directly with G1.
+
+23
+00:02:31.400 --> 00:02:39.000
+Requests can also come from a phone. After receiving the instruction, Go2 moves toward the shelf while the interface displays task status.
+
+24
+00:02:39.600 --> 00:02:46.400
+The mobile interface keeps users informed as the robot carries out their request.
+
+25
+00:02:47.600 --> 00:02:54.400
+On the web, a user asks ALOHA to move its lift to one hundred millimeters.
+
+26
+00:02:54.600 --> 00:02:59.400
+Camera views and point clouds show the action as it unfolds.
+

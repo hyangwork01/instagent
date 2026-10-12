@@ -1,0 +1,12 @@
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../dist');
+const args=Object.fromEntries(process.argv.slice(2).map(arg=>arg.replace(/^--/,'').split('=')));
+const port=Number(args.port||4174);
+const base='/'+(args.base??'instagent').replace(/^\/+|\/+$/g,'')+'/';
+const prefix=base==='//'?'/' :base;
+if(!fs.existsSync(path.join(root,'index.html')))throw new Error('Run npm run build before previewing');
+const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.mp4':'video/mp4','.pdf':'application/pdf','.vtt':'text/vtt; charset=utf-8','.ttf':'font/ttf','.txt':'text/plain; charset=utf-8','.xml':'application/xml'};
+http.createServer((req,res)=>{let url;try{url=decodeURIComponent(new URL(req.url,'http://localhost').pathname)}catch{res.writeHead(400).end();return}if(url==='/'&&prefix!=='/'){res.writeHead(302,{Location:prefix}).end();return}if(!url.startsWith(prefix)){res.writeHead(404).end('Not found');return}let target=path.resolve(root,url.slice(prefix.length)||'index.html');if(target!==root&&!target.startsWith(root+path.sep)){res.writeHead(403).end();return}if(fs.existsSync(target)&&fs.statSync(target).isDirectory())target=path.join(target,'index.html');if(!fs.existsSync(target)){res.writeHead(404).end('Not found');return}const size=fs.statSync(target).size;res.setHeader('Content-Type',types[path.extname(target)]||'application/octet-stream');res.setHeader('Accept-Ranges','bytes');res.setHeader('Cache-Control','no-cache');let start=0,end=size-1,status=200;if(req.headers.range){const match=/^bytes=(\d+)-(\d*)$/.exec(req.headers.range);if(!match){res.writeHead(416).end();return}start=Number(match[1]);if(match[2])end=Math.min(Number(match[2]),end);if(start>=size||end<start){res.writeHead(416,{'Content-Range':`bytes */${size}`}).end();return}status=206;res.setHeader('Content-Range',`bytes ${start}-${end}/${size}`)}res.setHeader('Content-Length',Math.max(0,end-start+1));res.writeHead(status);if(req.method==='HEAD'||size===0){res.end();return}const stream=fs.createReadStream(target,{start,end});stream.on('error',()=>res.destroy());res.on('close',()=>stream.destroy());stream.pipe(res);}).listen(port,'127.0.0.1',()=>console.log(`InstAgent website preview: http://127.0.0.1:${port}${prefix}`));
